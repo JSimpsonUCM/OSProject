@@ -8,16 +8,15 @@ public class Client2 {
 
         System.out.println ("Attemping to connect to host " +
                 serverHostname + " on port 6007.");
-
         Socket echoSocket = null;
         PrintWriter out = null;
         BufferedReader in = null;
-
         try {
             //echoSocket = new Socket("taranis", 7);
-            echoSocket = new Socket("localhost", 6007);
+            echoSocket = new Socket("localhost", 8000);
             out = new PrintWriter(echoSocket.getOutputStream(), true);
             in = new BufferedReader(new InputStreamReader(echoSocket.getInputStream()));
+            System.out.println("Successfully Connected to: " + serverHostname);
         } catch (Exception e) {
             System.err.println("Unknown host: " + serverHostname);
             System.exit(1);
@@ -29,7 +28,7 @@ public class Client2 {
         System.out.print ("input: ");
         while ((userInput = stdIn.readLine()) != null) {
             out.println(userInput);
-            if (userInput.equalsIgnoreCase("Done")){//if it is "Done", close current connection
+            if (userInput.equals("Done")){//if it is "Done", close current connection
                 break;
             }
             System.out.println("echo: " + in.readLine());
